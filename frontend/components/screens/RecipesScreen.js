@@ -8,14 +8,36 @@ function RecipesScreen(props) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a")
-        .then (res => res.json())
-        .then (recipeData => {
-            recipeData.forEach(recipe => {
-                setRecipes([...recipes, recipe]);
-            })
-        })
-    }, []);
+        const fetchData = async (letter) => {
+          try {
+            const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`);
+            const data = await res.json();
+            if (data.meals) { // Checking if the response contains meals
+              return data.meals;
+            }
+            return [];
+          } catch (error) {
+            console.error("Error fetching data:", error);
+            return [];
+          }
+        };
+      
+        const fetchAllData = async () => {
+          const allLetters = 'abcdefghijklmnopqrstuvwxyz'.split(''); // Create an array of alphabets
+          let allRecipes = [];
+      
+          for (let letter of allLetters) {
+            const recipes = await fetchData(letter);
+            allRecipes = [...allRecipes, ...recipes];
+          }
+      
+          setRecipes(allRecipes);
+        };
+      
+        fetchAllData();
+      }, []);
+      
+    
     return <>
         <View>
             <Text>Recipes Screen</Text>

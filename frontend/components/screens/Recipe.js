@@ -1,15 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const Song = ({ title, artist, genre, year, length, img }) => {
+const Recipe = ({ idMeal, strMeal, strCategory, strArea, strMealThumb }) => {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: img }} style={styles.image} />
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.text}>by {artist}</Text>
-      <Text style={styles.text}>
-        {genre} | {year} | {length}
-      </Text>
+      <Image source={{ uri: strMealThumb }} style={styles.image} />
+      <Text style={styles.title}>{strMeal}</Text>
+      <Text style={styles.text}>Category: {strCategory}</Text>
+      <Text style={styles.text}>Area: {strArea}</Text>
     </View>
   );
 };
@@ -37,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Song;
+export default Recipe;
