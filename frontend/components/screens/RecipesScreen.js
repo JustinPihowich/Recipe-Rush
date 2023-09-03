@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useState, useEffect } from 'react';
-import Recipe from './Recipe';
+import Recipe from '../Recipe';
 
 function RecipesScreen(props) {
 

@@ -3,6 +3,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import IngredientsScreen from "../screens/IngredientsScreen";
 import RecipesScreen from "../screens/RecipesScreen";
+import PreferencesScreen from "../screens/PreferencesScreen";
+import SavedRecipesScreen from "../screens/SavedRecipesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +27,8 @@ function RecipeTabs(props) {
         >
             <Tab.Screen name="Ingredients" component={IngredientsScreen} />
             <Tab.Screen name="Recipes" component={RecipesScreen} />
+            <Tab.Screen name="Preferences" component={PreferencesScreen} />
+            <Tab.Screen name="Saved Recipes" component={SavedRecipesScreen} />
         </Tab.Navigator>
     </>
 }
