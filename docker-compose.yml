@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  mysql-db:
+    image: mysql/mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: recipe42
+      MYSQL_DATABASE: recipe_db
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - my-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=recipe42"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mysql-db
+      PMA_USER: root
+      PMA_PASSWORD: recipe42
+    ports:
+      - "8081:80"
+    networks:
+      - my-network
+    depends_on:
+      - mysql-db
+    restart: always
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  db-data:
